@@ -1,3 +1,7 @@
 Login_Index:
     path: /
     controller: App\Controller\LoginController::index
+
+Login_authenticate:
+    path: /authenticate
+    controller: App\Controller\LoginController::authenticate
