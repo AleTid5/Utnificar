@@ -1,7 +1,26 @@
-Login_Index:
+## Login
+#### Views
+Login_index:
     path: /
     controller: App\Controller\LoginController::index
 
+Login_forgot:
+    path: /forgot
+    controller: App\Controller\LoginController::forgot
+
+Login_register:
+    path: /register
+    controller: App\Controller\LoginController::register
+
+#### Controllers
 Login_authenticate:
     path: /authenticate
     controller: App\Controller\LoginController::authenticate
+
+Login_signup:
+    path: /signup
+    controller: App\Controller\LoginController::signup
+
+Login_recovery:
+    path: /recovery
+    controller: App\Controller\LoginController::recovery

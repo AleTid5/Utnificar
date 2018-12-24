@@ -1,13 +1,10 @@
 ( function ( $ ) {
     "use strict";
 
-	$(function() {
-
-		setTimeout(function(){
-		  $('.load-bar').fadeOut().remove();
-		},3800);
-	     
-	});
+    $(document).ready(function () {
+        setTimeout(function(){
+            $('.load-bar').fadeOut();
+        },3800);    })
 	
 })(jQuery);
 

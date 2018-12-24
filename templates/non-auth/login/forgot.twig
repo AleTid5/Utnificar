@@ -1,0 +1,18 @@
+{% extends 'non-auth/layout.twig' %}
+{% block title %}Recuperar contraseña{% endblock %}
+{% block content %}
+    <h1>Olvidé la contraseña</h1>
+    <p>Te enviaremos un link a tu E-Mail de restablecimiento.</p>
+
+    <form action="{{ absolute_url('recover') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="email">Por favor ingresá tu E-Mail:</label>
+            <input type="email" class="form-control" required name="email" id="email">
+        </div>
+        <input class="login-btn btn-block" type="submit" value="Enviarme un link">
+    </form>
+
+    <div class="panel-help">
+        <p><a href="{{ absolute_url('/') }}">Volver</a></p>
+    </div>
+{% endblock %}

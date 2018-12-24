@@ -1,20 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Alejandrox">
-        <meta name="description" content="UTNificate">
-        <title>{% block title %}UTNificate{% endblock %}</title>
-        <!-- Bootstrap -->
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-        <!-- Font-awesome -->
-        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alejandrox">
+    <meta name="description" content="UTNificate">
+    <title>UTNificar | {% block title %}{% endblock %}</title>
+    <link href="{{ absolute_url('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ absolute_url('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ absolute_url('css/base.css') }}">
+    {% block stylesheets %}{% endblock %}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ absolute_url('img/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ absolute_url('img/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ absolute_url('img/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ absolute_url('img/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ absolute_url('img/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ absolute_url('img/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ absolute_url('img/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ absolute_url('img/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ absolute_url('img/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ absolute_url('img/favicon/android-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ absolute_url('img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ absolute_url('img/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute_url('img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ absolute_url('manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ absolute_url('img/favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<div class="load-bar">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+{% for message in app.session.getFlashBag.get('message') %}
+    <div class="navbar-fixed-top col-sm-offset-8 col-sm-4 mt-3">
+        <div class="alert alert-{{ message.class }}">
+            <strong>{{ message.title }}</strong> {{ message.description }}
+        </div>
+    </div>
+{% endfor %}
+{% block body %}{% endblock %}
+<script type="text/javascript" src="{{ absolute_url('js/jquery-3.2.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ absolute_url('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ absolute_url('js/preloader.js') }}"></script>
+<script type="text/javascript" src="{{ absolute_url('js/script.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
