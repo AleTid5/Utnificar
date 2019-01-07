@@ -1,8 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Service\SessionService;
 use App\Utils\Login;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,6 +12,7 @@ class LoginController extends Controller
 {
     public function index(array $view = []) : Response
     {
+        SessionService::clear();
         return new Response($this->renderView('non-auth/login/index.twig', $view));
     }
 
@@ -23,13 +26,21 @@ class LoginController extends Controller
         return new Response($this->renderView('non-auth/login/register.twig', $view));
     }
 
-    public function authenticate(Request $request) : Response
+    public function dashboard() : Response
+    {
+        return new Response($this->renderView('auth/dashboard/index.twig'));
+    }
+
+    public function authenticate(Request $request) : RedirectResponse
     {
         try {
-            (new Login())->checkCredentials($request->request->get('email'), $request->request->get('password'));
-            return new Response($this->renderView('non-auth/login/index.twig'));
-        } catch (\Exception $e) {
+            (new Login($this->getDoctrine()))->checkCredentials(
+                $request->request->get('email'),
+                $request->request->get('password'));
 
+            return new RedirectResponse('dashboard');
+        } catch (\Exception $e) {
+            return new RedirectResponse('/');
         }
     }
 }

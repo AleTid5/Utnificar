@@ -192,7 +192,7 @@ body {
 	border-right: 3px solid #2c343a;
 	height: 75px;
 	padding-top: 15px;
-	width: 235px;
+	width: 350px;
 }
 
 .nav-top .navbar-brand img {
@@ -565,7 +565,7 @@ body {
 
 	.nav-top .logo a {
 		border-right: none;
-		width: 150px;
+		width: 170px;
 		height: 60px;
 		padding-top: 10px;
 		padding-left: 8px;
