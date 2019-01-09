@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,20 +31,16 @@ class Subject
     /**
      * @ORM\Column(type="smallint")
      */
-    private $semester;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
     private $plan;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Career", inversedBy="subjects")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $career;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $status;
 
@@ -80,18 +78,6 @@ class Subject
         return $this;
     }
 
-    public function getSemester(): ?int
-    {
-        return $this->semester;
-    }
-
-    public function setSemester(int $semester): self
-    {
-        $this->semester = $semester;
-
-        return $this;
-    }
-
     public function getPlan(): ?int
     {
         return $this->plan;
@@ -104,24 +90,24 @@ class Subject
         return $this;
     }
 
-    public function getCareer(): ?int
+    public function getCareer(): ?career
     {
         return $this->career;
     }
 
-    public function setCareer(int $career): self
+    public function setCareer(?career $career): self
     {
         $this->career = $career;
 
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 

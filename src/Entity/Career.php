@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +29,7 @@ class Career
     private $duration;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $status;
 
@@ -35,6 +37,16 @@ class Career
      * @ORM\Column(type="datetime")
      */
     private $registerDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subject", mappedBy="career")
+     */
+    private $subjects;
+
+    public function __construct()
+    {
+        $this->subjects = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -65,12 +77,12 @@ class Career
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -85,6 +97,37 @@ class Career
     public function setRegisterDate(\DateTimeInterface $registerDate): self
     {
         $this->registerDate = $registerDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subject[]
+     */
+    public function getSubjects(): Collection
+    {
+        return $this->subjects;
+    }
+
+    public function addSubject(Subject $subject): self
+    {
+        if (!$this->subjects->contains($subject)) {
+            $this->subjects[] = $subject;
+            $subject->setCareer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubject(Subject $subject): self
+    {
+        if ($this->subjects->contains($subject)) {
+            $this->subjects->removeElement($subject);
+            // set the owning side to null (unless already changed)
+            if ($subject->getCareer() === $this) {
+                $subject->setCareer(null);
+            }
+        }
 
         return $this;
     }

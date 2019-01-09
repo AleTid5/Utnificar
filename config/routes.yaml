@@ -1,35 +1,17 @@
-#### Frontend Non Auth
-## Login
-Login_index:
-    path: /
-    controller: App\Controller\LoginController::index
+########################################################################################################################
+##              EL ENRUTAMIENTO EN SYMFONY 4 FUNCIONA BAJO UN PATRÓN DE JERARQUÍAS. LAS MISMAS SON:                   ##
+##              · Annotations (Sistema de rutas por anotaciones en las funciones de los controladores)                ##
+##              · YAML (Sistema de rutas por archivo de texto plano)                                                  ##
+##              · XML (Sistema de rutas por archivo de texto plano)                                                   ##
+##              · PHP (Sistema de rutas por archivo de texto plano)                                                   ##
+########################################################################################################################
+# Logout
+logout:
+  path: /logout
 
-Login_forgot:
-    path: /forgot
-    controller: App\Controller\LoginController::forgot
-
-Login_register:
-    path: /register
-    controller: App\Controller\LoginController::register
-
-#### Backend Non Auth
-## Login
-Login_authenticate:
-    path: /authenticate
-    controller: App\Controller\LoginController::authenticate
-
-Login_signup:
-    path: /signup
-    controller: App\Controller\LoginController::signup
-
-Login_recovery:
-    path: /recovery
-    controller: App\Controller\LoginController::recovery
-
-#### Frontend Auth
-## Home
-Home_dashboard:
-    path: /dashboard
-    controller: App\Controller\HomeController::dashboard
-
-#### Backend Auth
+# Errors
+error_404:
+  path: /{route}
+  controller: App\Controller\SecurityController::error_404
+  requirements:
+    route: '.+'

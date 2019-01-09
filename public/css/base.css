@@ -1,12 +1,33 @@
 /***********************************************
 
-Project		: Rocket Admin Dashboard
+Project		: Utnificar Dashboard
 Version		: 1.0
 Last change : 08/08/17
-Author		: ThemeSonyX
+Author		: Alejandrox
 
 /************************************************/
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
 
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #653cb5;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 
 /********** Imports **********/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,200i,400,400i,700');
@@ -657,42 +678,42 @@ body {
 	text-align: center;
 }
 
-.nav-bottom .nav-inbox {
+.nav-bottom .nav-first {
 	background-color: #4a49b4;
 	height: 80px;
 	padding-top: 15px;
 	text-align: center;
 }
 
-.nav-bottom .nav-myProfile {
+.nav-bottom .nav-second {
 	background-color: #5940b5;
 	height: 80px;
 	padding-top: 15px;
 	text-align: center;
 }
 
-.nav-bottom .nav-calendar {
+.nav-bottom .nav-third {
 	background-color: #6639b4;
 	height: 80px;
 	padding-top: 15px;
 	text-align: center;
 }
 
-.nav-bottom .nav-users {
+.nav-bottom .nav-fourth {
 	background-color: #7431b4;
 	height: 80px;
 	padding-top: 15px;
 	text-align: center;
 }
 
-.nav-bottom .nav-more {
+.nav-bottom .nav-fifth {
 	background-color: #7f2ab5;
 	height: 80px;
 	padding-top: 15px;
 	text-align: center;
 }
 
-.nav-bottom .nav-more:focus {
+.nav-bottom .nav-fifth:focus {
 	border-top: 5px solid #fff;
 	transition-duration: 0.1s;
 	color: #fff;
@@ -4255,9 +4276,61 @@ ul.checklist li:before {
     color: #8773ff;
 }
 
+div.form-group > div > ul > li {
+	color: red;
+}
 
+table.table-fh {
+	width: 100%;
+}
+table.table-fh, table.table-fh > tbody > tr > td {
+	border-collapse: collapse;
+	border: 1px solid #000;
+}
+table.table-fh > thead {
+	display: table;
+	width: calc(100% - 17px);
+}
+table.table-fh > tbody {
+	display: block;
+	max-height: 450px;
+	overflow-y: scroll;
+}
+table.table-fh.table-5c > thead > tr >th, table.table-fh.table-5c > tbody > tr > td {
+	width: calc(100% / 5);
+}
+table.table-fh > thead > tr >th, table.table-fh > tbody > tr > td {
+	padding: 5px;
+	word-break: break-all;
+	text-align: left;
+}
+table.table-fh > tbody > tr {
+	display: table;
+	width: 100%;
+}
+table.table-fh > tbody > tr > td {
+	border: none;
+}
+.loading-dots:after {
+	content: ' .';
+	animation: dots 1s steps(5, end) infinite;}
 
-
-
-
-
+@keyframes dots {
+	0%, 20% {
+		color: rgba(0,0,0,0);
+		text-shadow:
+				.25em 0 0 rgba(0,0,0,0),
+				.5em 0 0 rgba(0,0,0,0);}
+	40% {
+		color: white;
+		text-shadow:
+				.25em 0 0 rgba(0,0,0,0),
+				.5em 0 0 rgba(0,0,0,0);}
+	60% {
+		text-shadow:
+				.25em 0 0 white,
+				.5em 0 0 rgba(0,0,0,0);}
+	80%, 100% {
+		text-shadow:
+				.25em 0 0 white,
+				.5em 0 0 white;}}

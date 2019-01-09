@@ -1,3 +1,4 @@
+{% set url = app.request.schemeAndHttpHost ~ '/' %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,26 +8,26 @@
     <meta name="author" content="Alejandrox">
     <meta name="description" content="UTNificate">
     <title>UTNificar | {% block title %}{% endblock %}</title>
-    <link href="{{ absolute_url('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ absolute_url('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ absolute_url('css/base.css') }}">
+    <link href="{{ url ~ ('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url ~ ('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url ~ ('css/base.css') }}">
     {% block stylesheets %}{% endblock %}
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ absolute_url('img/favicon/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ absolute_url('img/favicon/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ absolute_url('img/favicon/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ absolute_url('img/favicon/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ absolute_url('img/favicon/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ absolute_url('img/favicon/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ absolute_url('img/favicon/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ absolute_url('img/favicon/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ absolute_url('img/favicon/apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{{ absolute_url('img/favicon/android-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ absolute_url('img/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ absolute_url('img/favicon/favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute_url('img/favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ absolute_url('manifest.json') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url ~ ('img/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url ~ ('img/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url ~ ('img/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url ~ ('img/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url ~ ('img/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url ~ ('img/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url ~ ('img/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url ~ ('img/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url ~ ('img/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url ~ ('img/favicon/android-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url ~ ('img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url ~ ('img/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url ~ ('img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url ~ ('manifest.json') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ absolute_url('img/favicon/ms-icon-144x144.png') }}">
+    <meta name="msapplication-TileImage" content="{{ url ~ ('img/favicon/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
@@ -35,18 +36,21 @@
     <div class="bar"></div>
     <div class="bar"></div>
 </div>
-{% for message in app.session.getFlashBag.get('message') %}
+{% for errorMessage in app.session.getFlashBag.get('errorMessage') %}
     <div class="navbar-fixed-top col-sm-offset-8 col-sm-4 mt-3">
-        <div class="alert alert-{{ message.class }}">
-            <strong>{{ message.title }}</strong> {{ message.description }}
+        <div class="alert alert-danger alert-dismissible show" role="alert">
+            <strong>Error!</strong> {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.parentElement.remove()">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
 {% endfor %}
 {% block body %}{% endblock %}
-<script type="text/javascript" src="{{ absolute_url('js/jquery-3.2.0.min.js') }}"></script>
-<script type="text/javascript" src="{{ absolute_url('js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ absolute_url('js/preloader.js') }}"></script>
-<script type="text/javascript" src="{{ absolute_url('js/script.js') }}"></script>
+<script type="text/javascript" src="{{ url ~ ('js/jquery-3.2.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ url ~ ('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url ~ ('js/preloader.js') }}"></script>
+<script type="text/javascript" src="{{ url ~ ('js/script.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

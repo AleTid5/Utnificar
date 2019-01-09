@@ -22,8 +22,8 @@ class CareerRepository extends ServiceEntityRepository
     // /**
     //  * @return Career[] Returns an array of Career objects
     //  */
-
-    /*public function findByExampleField($value)
+    /*
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
@@ -34,14 +34,17 @@ class CareerRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    */
 
+    /*
     public function findOneBySomeField($value): ?Career
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult();
-    }*/
-
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }

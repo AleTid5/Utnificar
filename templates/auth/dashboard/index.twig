@@ -1,24 +1,121 @@
 {% extends 'auth/layout.twig' %}
-{% block title %}Login{% endblock %}
+{% block title %}Inicio{% endblock %}
+{% block description %}Aquí podrá visualizar la información más relevante{% endblock %}
+{% set percentage = (userSubjects | length) - subjectRemains == 0 ? 0 :((((userSubjects | length) - subjectRemains) * 100) / (userSubjects | length)) | round(0, 'floor') %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url ~ ('css/prettycheckbox.min.css') }}">
+{% endblock %}
 {% block content %}
-    <h1><span>Utnificar alesad</span></h1>
-    <form action="{{ absolute_url('authenticate') }}" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input type="email" class="form-control" required name="email" id="email">
+    <div class="row cards">
+        <div class="card card-sales col-md-3 col-sm-6 col-xs-12">
+            <div class="card-box">
+                <h4>Total de materias</h4>
+                <span class="salesBox glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <h3 class="sales"><span class="count">{{ userSubjects | length }}</span></h3>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" class="form-control" required name="password" id="password">
+        <div class="card card-stats col-md-3 col-sm-6 col-xs-12">
+            <div class="card-box">
+                <h4>Materias restantes</h4>
+                <span class="rateBox glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <h3 class="rate"><span class="count">{{ subjectRemains }}</span></h3>
+                <h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar{{ 100 - percentage < 30 ? '-success' : 100 - percentage < 50 ?: 100 - percentage < 75 ? '-warning' : '-danger' }} progress-bar-striped active" role="progressbar" aria-valuenow="{{ 100 - percentage }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ 100 - percentage }}%">{{ 100 - percentage }}%</div>
+                    </div>
+                </h5>
+            </div>
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Recordarme</label>
+        <div class="card card-users col-md-3 col-sm-6 col-xs-12">
+            <div class="card-box">
+                <h4>Promedio de notas</h4>
+                <span class="usersBox glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <h3 class="users"><span class="count">{{ average[0] }}</span>,<span class="count">{{ average[1] }}</span></h3>
+            </div>
         </div>
-        <input class="login-btn btn-block" type="submit" value="Iniciar sesión">
-    </form>
-
-    <div class="panel-help">
-        <p><a href="{{ absolute_url('forgot') }}">¿Olvidaste la contraseña?</a></p>
-        <p><a href="{{ absolute_url('register') }}">Registrarme!</a></p>
+        <div class="card card-users col-md-3 col-sm-6 col-xs-12">
+            <div class="card-box">
+                <h4>Progreso de carrera</h4>
+                <span class="usersBox glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <h3 class="users"><span class="count">{{ percentage }}</span>%</h3>
+                <h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar{{ percentage < 30 ? '-danger' : percentage < 50 ? '-warning' : percentage < 75 ?: '-success' }} progress-bar-striped active" role="progressbar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage }}%"></div>
+                    </div>
+                </h5>
+            </div>
+        </div>
     </div>
+    <div class="row">
+        <div class="bootstrapTables">
+            <div class="col-xs-12">
+                <h3>Materias<button class="btn btn-primary pull-right" onclick="saveSubjects()"><i class="fa fa-floppy-o"></i> <span id="saveText">Guardar</span></button></h3>
+                <div class="table-responsive" style="max-height: 450px;">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Carrera</th>
+                            <th>Año</th>
+                            <th>Plan</th>
+                            <th>Nota</th>
+                            <th class="text-center">Aprobada</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for userSubject in userSubjects %}
+                            <tr>
+                                <td>{{ userSubject.getSubject().getID() }}</td>
+                                <td>{{ userSubject.getSubject().getName() }}</td>
+                                <td>{{ userSubject.getSubject().getCareer().getName() }}</td>
+                                <td>{{ userSubject.getSubject().getYear() }}</td>
+                                <td>{{ userSubject.getSubject().getPlan() }}</td>
+                                <td><input type="number" class="form-control text-center" value="{{ userSubject.getNote() ?: 0 }}" style="width: 40px" name="subjectNote" min="0" max="10"></td>
+                                <td class="text-center">
+                                    <div class="pretty p-icon p-round p-tada">
+                                        <input type="checkbox" {{ userSubject.getApproved() is same as('Y') ? 'checked' : '' }} name="subjectApproved"/>
+                                        <div class="state p-success-o">
+                                            <i class="icon fa fa-check"></i>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        function saveSubjects() {
+            var subjectNote = [];
+            var subjectApproved = [];
+
+            $.each($('[name="subjectNote"]').toArray(), function (k, v) {
+                subjectNote[k] = v.value
+            });
+
+            $.each($('[name="subjectApproved"]').toArray(), function (k, v) {
+                subjectApproved[k] = v.checked
+            });
+
+            $('#saveText').text('Guardando').addClass('loading-dots').parent().attr('disabled', true);
+            $.ajax({
+                url: '{{ url ~ 'user/subjects/save' }}',
+                method: 'POST',
+                data: {
+                    'subjectNote': subjectNote,
+                    'subjectApproved': subjectApproved
+                },
+                success: function (data) {
+                    window.location.reload(false);
+                }
+            });
+        }
+    </script>
 {% endblock %}

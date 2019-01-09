@@ -33,7 +33,7 @@
             </div><!-- end .nav-top-mobile -->
             <div class="logo">
                 <a class="navbar-brand" href="{{ absolute_url('dashboard') }}">
-                    <img src="img/logo.png" alt="Rocket Logo">
+                    <img src="{{ url ~ 'img/logo.png' }}" alt="Rocket Logo">
                     <span>UTNificar</span>
                     <small class="hidden-xs"><i>Draco dormiens nunquam titillandus</i></small>
                 </a>
@@ -44,9 +44,9 @@
             <ul class="user-profile nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="user-block dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="user-name">Hola, {{ app.session.get('userName') }}</span>
+                        <span class="user-name">Hola, {{ app.session.get('username') }}</span>
                         <span class="caret"></span>
-                        <img src="img/favicon/2042503f1f2a1eceb05b421f3a9fb0f1.png" alt="User image">
+                        <img src="{{ url ~ 'img/favicon/2042503f1f2a1eceb05b421f3a9fb0f1.png' }}" alt="User image">
                     </a>
                     <ul class="user-profile-dropdown dropdown-menu animated fadeInDown">
                         <li>
@@ -54,7 +54,7 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="{{ absolute_url('/') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar sesión</a>
+                            <a href="{{ absolute_url('/logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar sesión</a>
                         </li>
                     </ul>
                 </li>
@@ -129,7 +129,7 @@
                         </li>#}
                         <li><a class="message-item" href="#">
                       <span class="message-item-img">
-                        <img src="img/users/05efbbff51a585560a3aee42e148e61b.jpg" alt="User image">
+                        <img src="{{ url ~ 'img/users/05efbbff51a585560a3aee42e148e61b.jpg' }}" alt="User image">
                       </span>
                                 <div class="message-block">
                                     <div class="message-item-from">Alejandro Tidele</div>
