@@ -8,14 +8,13 @@ Author		: Alejandrox
 /************************************************/
 ::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+	background-color: #22272b;
 }
 
 ::-webkit-scrollbar
 {
 	width: 6px;
-	background-color: #F5F5F5;
+	background-color: #22272b;
 }
 
 ::-webkit-scrollbar-thumb
@@ -671,7 +670,7 @@ body {
 	font-size: 26px;
 }
 
-.nav-bottom .nav-dash {
+.nav-bottom .nav-first {
 	background-color: #404eb4;
 	height: 80px;
 	padding-top: 15px;
@@ -719,7 +718,7 @@ body {
 	color: #fff;
 }
 
-.nav-moreBox {
+.nav-fifthBox {
 	position: fixed;
 	display: none;
 	right: 0;
@@ -731,10 +730,11 @@ body {
 	background-color: #5940b5;
 	border: 8px solid #423180;
 	font-weight: 400;
-	font-size: 16px;	
+	font-size: 16px;
+	z-index: 999;
 }
 
-.nav-moreBox a {
+.nav-fifthBox a {
 	text-decoration: none;
 }
 
@@ -815,7 +815,7 @@ ul.checklist li:before {
 		border-top: 2px solid #fff;
 	}
 
-	.nav-moreBox {
+	.nav-fifthBox {
 		bottom: 50px;
 		width: auto;
 		max-height: 90vh;
@@ -824,7 +824,7 @@ ul.checklist li:before {
 		font-size: 14px;	
 	}
 
-	.nav-bottom .nav-more:focus {
+	.nav-bottom .nav-fifth:focus {
 		border-top: 2px solid #fff;
 	}
 
@@ -879,7 +879,7 @@ ul.checklist li:before {
 
 	.contentWrapper {
 		margin: 0 auto;
-		padding: 0 80px;
+		padding: 0 80px 75px;
 	}
 }
 

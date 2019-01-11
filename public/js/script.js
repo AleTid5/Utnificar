@@ -33,18 +33,18 @@
 
 	function bottomNavBorder() {
 		//Toggle .current class 
-		$('.nav-dash, .nav-inbox, .nav-myProfile, .nav-calendar, .nav-users, .nav-more').on('mouseover', function(){
+		$('.nav-first, .nav-second, .nav-third, .nav-fourth, .nav-users, .nav-fifth').on('mouseover', function(){
 			$(this).addClass('currentPageHover');
 		});
 
-		$('.nav-dash, .nav-inbox, .nav-myProfile, .nav-calendar, .nav-users, .nav-more').on('mouseout', function(){
+		$('.nav-first, .nav-second, .nav-third, .nav-fourth, .nav-users, .nav-fifth').on('mouseout', function(){
 			$(this).removeClass('currentPageHover');
 		});
 	}
 
 	function navMoreBox() {
 		//Show and hide box with more pages
-		$('.nav-more').on('click', function(){
+		$('.nav-fifth').on('click', function(){
 	        $('#box').css("display", "block");
 	        return false;
 	    });
